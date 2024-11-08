@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """
-This module provides functionality to fetch and display the TODO list progress of an employee
-from a given API. It uses the `requests` library to make HTTP requests to the API and fetch
+This module provides functionality to fetch and 
+display the TODO list progress of an employee
+from a given API. It uses the `requests` library 
+to make HTTP requests to the API and fetch
 the necessary data.
 
 Functions:
@@ -43,7 +45,8 @@ def get_employee_todo_progress(employee_id):
 
     # Display the TODO list progress
     print(
-        f"Employee {employee_name} is done with tasks({number_of_done_tasks}/{total_tasks}):"
+        f"Employee {employee_name} is done with tasks(
+        {number_of_done_tasks}/{total_tasks}):"
     )
     for task in done_tasks:
         print(f"\t {task.get('title')}")
