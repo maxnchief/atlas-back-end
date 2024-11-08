@@ -28,7 +28,7 @@ for user in users:
     username = user['username']
     tasks = requests.get(
         f"{url}/todos", params={"userId": user_id}).json()
-
+    
     # List to store tasks for the current user
     user_tasks = []
     for task in tasks:
@@ -37,7 +37,7 @@ for user in users:
             "task": task['title'],
             "completed": task['completed']
         })
-
+    
     # Add the user's tasks to the dictionary
     all_tasks[user_id] = user_tasks
 
