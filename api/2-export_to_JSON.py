@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module provides functionality to gather 
+This module provides functionality to gather
 data from an API and export it to a JSON file.
 
 """
