@@ -34,7 +34,7 @@ def export_to_csv(user_id, user_data, todos_data):
         for task in todos_data:
             writer.writerow(
                 [user_id, user_data['username'],
-                  task['completed'], task['title']])
+                task['completed'], task['title']])
 
 
 if __name__ == "__main__":
