@@ -3,6 +3,7 @@
 This script fetches and displays the TODO list progress of an employee from an API.
 
 """
+
 import requests
 import sys
 
