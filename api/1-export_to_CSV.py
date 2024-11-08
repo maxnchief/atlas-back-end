@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module provides functionality to gather user 
+This module provides functionality to gather user
 and task data from an API and export it to a CSV file.
 
 """
@@ -29,10 +29,11 @@ def export_to_csv(user_id, user_data, todos_data):
     with open(filename, mode='w', newline='') as file:
         writer = csv.writer(file, quoting=csv.QUOTE_ALL)
         writer.writerow(
-        ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
-        
+            ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+
         for task in todos_data:
-            writer.writerow([user_id, user_data['username'], task['completed'], task['title']])
+            writer.writerow(
+                [user_id, user_data['username'], task['completed'], task['title']])
 
 
 if __name__ == "__main__":
