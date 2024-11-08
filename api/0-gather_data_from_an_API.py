@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 """
-This script fetches and displays the TODO list progress of an employee from a given API.
+This script fetches and displays the TODO list 
+progress of an employee from a given API.
 
 """
 import requests
 import sys
+
 
 def get_employee_todo_progress(employee_id):
     # Base URL for the API
@@ -31,9 +33,11 @@ def get_employee_todo_progress(employee_id):
     number_of_done_tasks = len(done_tasks)
 
     # Display the TODO list progress
-    print(f"Employee {employee_name} is done with tasks({number_of_done_tasks}/{total_tasks}):")
+    print(f"Employee {employee_name} 
+          is done with tasks({number_of_done_tasks}/{total_tasks}):")
     for task in done_tasks:
         print(f"\t {task.get('title')}")
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
