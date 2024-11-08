@@ -1,10 +1,19 @@
 #!/usr/bin/python3
+"""
+This module provides functionality to fetch and display the TODO list progress of an employee
+from a given API. It uses the `requests` library to make HTTP requests to the API and fetch
+the necessary data.
 
+Functions:
+    get_employee_todo_progress(employee_id):
+        Fetches and displays the TODO list progress of the specified employee.
+
+Usage:
+    Run the module from the command line with the employee ID as an argument:
+    python 0-gather_data_from_an_API.py <employee_id>
 """
 
-This module fetches and displays the TODO list progress of an employee from a given API.
 
-"""
 
 import requests
 import sys
