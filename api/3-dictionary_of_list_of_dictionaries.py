@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """
-This module fetches user data and their associated tasks
+This module fetches user data and their associated tasks 
 from a placeholder API
 and stores the information in a JSON file.
 The data is organized in a dictionary
-where each key is a user ID and the value is a
+where each key is a user ID and the value is a 
 list of dictionaries containing
 task details for that user.
 
