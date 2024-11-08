@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """
 This module fetches and displays the TODO list progress of an employee from a given API.
 
