@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-This module provides functionality to fetch and 
+This module provides functionality to fetch and
 display the TODO list progress of an employee
-from a given API. It uses the `requests` library 
+from a given API. It uses the `requests` library
 to make HTTP requests to the API and fetch
 the necessary data.
 
