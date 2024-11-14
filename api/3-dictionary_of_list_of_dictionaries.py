@@ -1,47 +1,37 @@
 #!/usr/bin/python3
-"""
-This module fetches user data and their associated tasks
-from a placeholder API
-and stores the information in a JSON file.
-The data is organized in a dictionary
-where each key is a user ID and the value is a
-list of dictionaries containing
-task details for that user.
-
+"""A python script that returns information about an
+employees TODO list progress.
 """
 import json
 import requests
-
-# URL for the API
-url = "https://jsonplaceholder.typicode.com"
-
-# Fetch users
-users = requests.get(f"{url}/users").json()
-
-# Dictionary to store all tasks for all employees
-all_tasks = {}
+import sys
 
 
-# Iterate through each user to fetch their tasks
-for user in users:
-    user_id = user['id']
-    username = user['username']
-    tasks = requests.get(
-        f"{url}/todos", params={"userId": user_id}).json()
+def get_todo_info():
+    """A function that gets the todo information for all users"""
 
-    # List to store tasks for the current user
-    user_tasks = []
-    for task in tasks:
-        user_tasks.append({
-            "username": username,
-            "task": task['title'],
-            "completed": task['completed']
-        })
+    # GET all the users
+    r = requests.get('https://jsonplaceholder.typicode.com/users')
+    users = json.loads(r.text)
+    dict_ = {}
+    for user in users:
+            task_list = []
+            dict_[user.get('id')] = task_list
+            # GET tasks for specific user
+            r = requests.get(
+                'https://jsonplaceholder.typicode.com/todos?userId={}'
+                .format(user.get('id')))
+            todos = json.loads(r.text)
+            for task in todos:
+                task_d = {}
+                task_d['username'] = user.get('username')
+                task_d['task'] = task.get('title')
+                task_d['completed'] = task.get('completed')
+                task_list.append(task_d)
 
-    # Add the user's tasks to the dictionary
-    all_tasks[user_id] = user_tasks
+    with open("todo_all_employees.json", 'w', encoding='utf-8') as fp:
+        json.dump(dict_, fp)
 
-# Write the dictionary to a JSON file
 
-with open("todo_all_employees.json", "w") as json_file:
-    json.dump(all_tasks, json_file)
+if __name__ == "__main__":
+    get_todo_info()
