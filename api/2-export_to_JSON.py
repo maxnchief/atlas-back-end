@@ -1,47 +1,38 @@
 #!/usr/bin/python3
-"""
-This module provides functionality to gather
-data from an API and export it to a JSON file.
-
+"""A python script that returns information about an
+employees TODO list progress.
 """
 import json
 import requests
+import sys
 
 
-def gather_data_from_api(user_id):
-    user_url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
-    todos_url = f"https://jsonplaceholder.typicode.com/users/{user_id}/todos"
+def get_todo_info():
+    """A function that gets the todo information for a particular user id"""
+    user_id = sys.argv[1]
+    # GET /user/<id> resource for user info
+    r = requests.get('https://jsonplaceholder.typicode.com/users?id={}'
+                     .format(user_id))
+    user = json.loads(r.text)
+    user_name = user[0].get('username')
 
-    user_response = requests.get(user_url)
-    todos_response = requests.get(todos_url)
+    # GET /user/<id>/todos for todo info
+    r = requests.get('https://jsonplaceholder.typicode.com/todos?userId={}'
+                     .format(user_id))
+    todos = json.loads(r.text)
+    dict_ = {}
+    task_list = []
+    dict_[user_id] = task_list
+    for task in todos:
+        task_d = {}
+        task_d['task'] = task.get('title')
+        task_d['completed'] = task.get('completed')
+        task_d['username'] = user_name
+        task_list.append(task_d)
 
-    if user_response.status_code != 200 or todos_response.status_code != 200:
-        raise Exception("Error fetching data from API")
-
-    user_data = user_response.json()
-    todos_data = todos_response.json()
-
-    return user_data, todos_data
-
-
-def export_to_json(user_id):
-    user_data, todos_data = gather_data_from_api(user_id)
-
-    tasks = []
-    for task in todos_data:
-        task_info = {
-            "task": task["title"],
-            "completed": task["completed"],
-            "username": user_data["username"]
-        }
-        tasks.append(task_info)
-
-    data = {str(user_id): tasks}
-
-    with open(f"{user_id}.json", "w") as json_file:
-        json.dump(data, json_file, indent=4)
+    with open("{}.json".format(user_id), 'w', encoding='utf-8') as fp:
+        json.dump(dict_, fp)
 
 
 if __name__ == "__main__":
-    user_id = 1  # Replace with the desired user ID
-    export_to_json(user_id)
+    get_todo_info()
